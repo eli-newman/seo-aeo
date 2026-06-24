@@ -1,0 +1,23 @@
+{
+  "name": "fixture-site",
+  "siteUrl": "https://example.com",
+  "layout": {
+    "framework": "next",
+    "draftsPath": "content/drafts",
+    "postsPath": "content/posts",
+    "publicPath": "public",
+    "publicUrlBase": "/blog"
+  },
+  "article": {
+    "targetWordCount": 1400,
+    "internalLinkTargets": [{ "url": "/", "anchor": "Example" }]
+  },
+  "icp": {
+    "primaryRoles": ["solo founder"],
+    "companySize": "1-3 people",
+    "pain": "ships product but no one finds it"
+  },
+  "images": { "enabled": true, "inlineCount": 1 },
+  "cadence": { "frequency": "biweekly", "cron": "0 14 * * 1" },
+  "author": "Eli Newman"
+}

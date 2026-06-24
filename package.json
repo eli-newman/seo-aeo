@@ -1,0 +1,74 @@
+{
+  "name": "@elinewman/seo-aeo",
+  "version": "0.1.0",
+  "description": "Drop-in SEO + AEO content engine: writes an optimized MDX article for your site every week or two, forever, via GitHub Actions.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Eli Newman",
+  "keywords": [
+    "seo",
+    "aeo",
+    "geo",
+    "content",
+    "mdx",
+    "blog",
+    "ai",
+    "generative-engine-optimization",
+    "nextjs",
+    "astro"
+  ],
+  "bin": {
+    "seo-aeo": "dist/cli/index.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "templates",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run typecheck && npm run lint && npm run test"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@clack/prompts": "^0.10.0",
+    "@google/genai": "^0.8.0",
+    "commander": "^13.1.0",
+    "execa": "^9.5.0",
+    "gray-matter": "^4.0.3",
+    "picocolors": "^1.1.1",
+    "rss-parser": "^3.13.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/node": "^22.13.0",
+    "globals": "^15.15.0",
+    "@typescript-eslint/eslint-plugin": "^8.24.0",
+    "@typescript-eslint/parser": "^8.24.0",
+    "eslint": "^9.20.0",
+    "eslint-config-prettier": "^10.0.0",
+    "prettier": "^3.5.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

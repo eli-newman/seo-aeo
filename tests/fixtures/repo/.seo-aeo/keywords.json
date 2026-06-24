@@ -1,0 +1,18 @@
+{
+  "keywords": [
+    {
+      "keyword": "how to get your first 100 users",
+      "intent": "informational",
+      "volume": 320,
+      "difficulty": 24,
+      "notes": "Core ICP question."
+    },
+    {
+      "keyword": "best analytics tool for solo founders",
+      "intent": "commercial",
+      "volume": 90,
+      "difficulty": 18,
+      "notes": "High intent."
+    }
+  ]
+}
