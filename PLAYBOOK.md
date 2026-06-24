@@ -34,6 +34,13 @@ If you genuinely only have a URL, you can still produce the Phase 1 *audit*
   metadata, not writing marketing copy. Article generation is Phase 3's job.
 - **Match the repo's conventions** (styling, file layout, TS/JS). You're a
   guest in this codebase.
+- **Check the working tree first** (`git status`). If it's **dirty**
+  (uncommitted changes / untracked files), STOP and surface it — don't
+  branch over or entangle the user's in-progress work with yours. Ask them
+  to commit/stash, or to confirm it's safe to include.
+- **Don't redo good work.** Many sites are already partly (or fully)
+  optimized. Inventory what exists *before* changing anything, and only fix
+  real gaps. "Already done well" is a valid, valuable finding — report it.
 
 ---
 
@@ -55,8 +62,14 @@ If you genuinely only have a URL, you can still produce the Phase 1 *audit*
 4. If a blog exists, read one existing post and record its **frontmatter
    shape** — you'll reconcile it with the contract in Phase 2/3.
 
+Also **inventory existing SEO/AEO work** so you don't redo it: is there
+already a `robots`, `sitemap`, `llms.txt`, per-page metadata, `next/font`,
+and JSON-LD (`Organization`/`Article`/`FAQPage`)? Note what's present and
+good vs. missing or weak — Phase 1 only touches the gaps.
+
 **Gate:** you can state, in one paragraph: framework, where pages live,
-where static assets live, and whether a blog exists. Write this as the
+where static assets live, whether a blog exists, **whether the tree is
+clean**, and **what SEO/AEO is already in place**. Write this as the
 opening of your report.
 
 ---

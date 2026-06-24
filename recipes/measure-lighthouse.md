@@ -87,9 +87,19 @@ If a target is blocked by something out of scope (slow host, heavy required
 third-party), **say so in the report** rather than silently passing — note
 the metric, the cause, and the recommended fix.
 
-## No MCP tools? Fallbacks
+## No MCP tools? Fallbacks (in order of reliability)
 
-- **PageSpeed Insights API** (no install, audits a public URL, returns
-  Lighthouse + field CWV):
-  `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=<URL>&strategy=mobile`
-- **Lighthouse CLI:** `npx lighthouse <URL> --form-factor=mobile --output=json --output-path=.seo-aeo/reports/lh.json`
+1. **Chrome DevTools MCP** `lighthouse_audit` — best, but needs a free
+   Chrome instance. If it errors with "browser is already running / profile
+   locked," another Chrome holds the profile; close it or skip to the CLI.
+2. **PageSpeed Insights API** — no install, audits a *public* URL. The
+   anonymous quota is small and shared, so add `&key=<PSI_API_KEY>` (free
+   from Google Cloud) for real use:
+   `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=<URL>&strategy=mobile&key=<KEY>`
+3. **Lighthouse CLI:** `npx lighthouse <URL> --form-factor=mobile --output=json --output-path=.seo-aeo/reports/lh.json --chrome-flags="--headless=new"` (also needs Chrome).
+
+**If none are available**, don't fake a pass. Do the **code-level audit**
+(read the metadata/JSON-LD/image/font setup directly) and mark live
+performance as **PENDING** in the report, with a note to run the audit once
+a browser/PSI key is available. An honest "measurement pending" beats a
+fabricated score.
