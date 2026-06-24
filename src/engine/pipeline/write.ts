@@ -37,18 +37,9 @@ export function countWords(body: string): number {
 }
 
 function seedKeywords(outline: Outline): string[] {
-  const seeds = [outline.targetKeyword];
-  const seen = new Set([outline.targetKeyword.toLowerCase()]);
-  for (const sec of outline.sections) {
-    const kw = sec.heading.replace(/[^\w\s-]/g, "").trim().toLowerCase();
-    const words = kw.split(/\s+/).length;
-    if (words >= 3 && words <= 8 && !seen.has(kw)) {
-      seeds.push(kw);
-      seen.add(kw);
-    }
-    if (seeds.length >= 5) break;
-  }
-  return seeds;
+  // Just the target keyword. The SEO pass generates the clean 5-8 variants;
+  // seeding from section headings produced sentence-like junk keywords.
+  return [outline.targetKeyword];
 }
 
 function buildUserPrompt(outline: Outline, project: ProjectConfig): string {

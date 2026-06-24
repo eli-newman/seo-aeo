@@ -83,16 +83,22 @@ function ensureInternalLink(body: string, ctx: EngineContext): string {
   );
 }
 
+/** Looks like a real keyword, not a leaked sentence/heading. */
+function isKeywordLike(k: string): boolean {
+  return k.length <= 60 && k.split(/\s+/).length <= 7;
+}
+
 function mergeKeywords(existing: string[], incoming: string[]): string[] {
   const seen = new Set<string>();
   const out: string[] = [];
+  // Incoming (the SEO pass's curated set) first; existing is just the seed.
   for (const kw of [...incoming, ...existing]) {
     const k = kw.trim().toLowerCase();
-    if (!k || seen.has(k)) continue;
+    if (!k || seen.has(k) || !isKeywordLike(k)) continue;
     seen.add(k);
     out.push(k);
   }
-  return out;
+  return out.slice(0, 8); // cap — 5-8 is the sweet spot
 }
 
 export async function applySeo(
