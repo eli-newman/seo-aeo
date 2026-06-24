@@ -12,9 +12,13 @@ import { sharedSystemPrefix } from "../prompts.js";
 import { extractJson } from "../util.js";
 import { log } from "../log.js";
 
+// No hard max on title/description: the LLM routinely overshoots by a few
+// chars, and rejecting the whole patch over that threw away every SEO
+// refinement (keywords, internal links, body fixes). The apply step
+// truncates title→70 and description→180, so tolerate overshoot here.
 const SeoPatch = z.object({
-  title: z.string().min(1).max(70),
-  description: z.string().min(1).max(160),
+  title: z.string().min(1),
+  description: z.string().min(1),
   keywords: z.array(z.string()).default([]),
   body: z.string().min(1),
 });

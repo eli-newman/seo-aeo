@@ -12,9 +12,11 @@ import { sharedSystemPrefix } from "../prompts.js";
 import { extractJson } from "../util.js";
 import { log } from "../log.js";
 
+// quickAnswer isn't used downstream (only body is), so don't let an
+// overshoot on it reject the whole patch and discard the AEO body edits.
 const AeoPatch = z.object({
   body: z.string().min(1),
-  quickAnswer: z.string().max(800).default(""),
+  quickAnswer: z.string().default(""),
 });
 
 function buildUserPrompt(article: Article): string {

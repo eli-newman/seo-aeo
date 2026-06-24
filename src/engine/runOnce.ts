@@ -74,9 +74,11 @@ export async function createContext(
   };
 }
 
+// Tolerate length overshoot (truncated where applied) so a few extra chars
+// don't reject the repair and leave the article unfixed.
 const RepairPatch = z.object({
-  title: z.string().min(1).max(70).optional(),
-  description: z.string().min(1).max(180).optional(),
+  title: z.string().min(1).optional(),
+  description: z.string().min(1).optional(),
   body: z.string().min(1),
 });
 
