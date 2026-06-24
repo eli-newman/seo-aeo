@@ -71,13 +71,22 @@ This is the half most sites miss.
 - [ ] Make sure critical copy is **server-rendered text**, not baked into
       images or only injected client-side where crawlers may miss it.
 
-## 6. Core Web Vitals — quick wins 🟡
+## 6. Core Web Vitals — performance IS SEO 🔴
 
+CWV are a confirmed Google ranking factor. **Measure** with
+[`recipes/measure-lighthouse.md`](../recipes/measure-lighthouse.md)
+(mobile, production build) — baseline before, re-check at the gate. Targets:
+**LCP ≤ 2.5s · INP ≤ 200ms · CLS ≤ 0.1**.
+
+- [ ] **LCP:** the hero/largest element loads fast — optimized + `priority`/
+      preloaded hero image, no render-blocking CSS/JS, fast host/CDN.
+- [ ] **CLS:** images & embeds have width/height (or aspect-ratio), space is
+      reserved for anything that loads late, `font-display: swap`.
+- [ ] **INP:** trim main-thread JS, break up long tasks, defer non-critical
+      and third-party scripts.
 - [ ] Images use the framework's optimized component (`next/image`,
-      Astro `<Image>`), have width/height, and lazy-load below the fold.
-- [ ] Fonts use `font-display: swap` (or `next/font`), preconnect to font hosts.
-- [ ] No obvious layout shift (reserve space for images/embeds).
-- [ ] Defer non-critical third-party scripts.
+      Astro `<Image>`) and lazy-load below the fold.
+- [ ] Fonts use `next/font` / `font-display: swap`, preconnect to font hosts.
 
 ## 7. Accessibility basics (overlaps SEO) 🔵
 
@@ -93,7 +102,10 @@ This is the half most sites miss.
 - Every page has a unique title + description.
 - `robots.txt`, `sitemap.xml`, and `llms.txt` all exist and are valid.
 - `Organization` + `WebSite` JSON-LD validate.
-- You've written the before/after report.
+- **Re-measured scores hit target** (mobile, prod build): Lighthouse SEO ≥ 95,
+  Best Practices ≥ 90, Accessibility ≥ 90; LCP ≤ 2.5s, CLS ≤ 0.1, INP ≤ 200ms.
+  Out-of-scope misses are noted with cause + fix, not silently passed.
+- You've written the **before/after report (with scores)**.
 
 Commit: `seo-aeo: on-site SEO + AEO clean sweep`.
 

@@ -64,7 +64,16 @@ opening of your report.
 ## Phase 1 — On-site SEO + AEO clean sweep (no keys)
 
 **Goal:** make the *existing* site technically excellent for both Google
-and AI answer engines. Work through
+and AI answer engines.
+
+**Measure first.** Before editing anything, get a **baseline** with
+[`recipes/measure-lighthouse.md`](./recipes/measure-lighthouse.md): a
+Lighthouse audit (SEO / Accessibility / Best Practices) **and** a
+performance trace (Core Web Vitals). Performance *is* SEO — CWV are a Google
+ranking factor — so both run on **mobile**, against a production build or
+the live URL. Save the scores; you'll re-run them at the gate.
+
+Then work through
 [`checklists/onsite-seo-aeo.md`](./checklists/onsite-seo-aeo.md) top to
 bottom. For each item: check current state → fix in code → note it in the
 report.
@@ -84,11 +93,15 @@ The big rocks (full detail in the checklist):
 - **Core Web Vitals quick wins:** optimized/lazy images, font loading,
   no obvious layout shift.
 
-**Gate:** the site builds, every page has a unique title + description, a
-valid sitemap and robots exist, `llms.txt` exists, and at least the
-`Organization` + `WebSite` JSON-LD validates. Commit:
-`seo-aeo: on-site SEO + AEO clean sweep`. **Report to the user** with a
-before/after summary of what you changed, then continue.
+**Gate:** the site builds; every page has a unique title + description; a
+valid sitemap, robots, and `llms.txt` exist; `Organization` + `WebSite`
+JSON-LD validate; AND the **re-measured** scores (mobile, production build)
+hit the targets — Lighthouse **SEO ≥ 95**, Best Practices ≥ 90,
+Accessibility ≥ 90, and **LCP ≤ 2.5s / CLS ≤ 0.1 / INP ≤ 200ms**. If a
+target is blocked by something out of scope (slow host, required heavy
+third-party), note the metric + cause + fix in the report rather than
+silently passing. Commit: `seo-aeo: on-site SEO + AEO clean sweep`.
+**Report to the user** with the **before/after scores**, then continue.
 
 ---
 
