@@ -40,6 +40,16 @@ function isRetryable(err: unknown): boolean {
   return false;
 }
 
+/** Newer Claude models (e.g. Opus 4.8) reject the `temperature` param. */
+function isTemperatureDeprecation(err: unknown): boolean {
+  if (err instanceof Anthropic.APIError) {
+    const status = (err as { status?: number }).status;
+    const msg = String((err as { message?: string }).message ?? "");
+    return status === 400 && /temperature/i.test(msg);
+  }
+  return false;
+}
+
 export class AnthropicProvider implements TextProvider {
   private client: Anthropic;
 
@@ -55,13 +65,16 @@ export class AnthropicProvider implements TextProvider {
   async call(opts: TextCallOptions): Promise<string> {
     const { model, system, user, maxTokens = 8000, temperature = 0.7 } = opts;
 
+    // Some models (Opus 4.8+) have deprecated `temperature`. Send it by
+    // default; drop it and retry if the API rejects it.
+    let sendTemperature = true;
     let lastErr: unknown;
     for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
       try {
         const resp = await this.client.messages.create({
           model,
           max_tokens: maxTokens,
-          temperature,
+          ...(sendTemperature ? { temperature } : {}),
           system: [
             {
               type: "text",
@@ -78,6 +91,10 @@ export class AnthropicProvider implements TextProvider {
           .trim();
       } catch (err) {
         lastErr = err;
+        if (sendTemperature && isTemperatureDeprecation(err)) {
+          sendTemperature = false; // retry immediately without it
+          continue;
+        }
         if (!isRetryable(err) || attempt === MAX_ATTEMPTS - 1) throw err;
         const backoff = Math.min(20_000, 2_000 * 2 ** attempt);
         await sleep(backoff);
