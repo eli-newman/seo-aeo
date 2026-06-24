@@ -43,7 +43,7 @@ export class GeminiProvider implements ImageProvider {
   }>;
 
   constructor(
-    model = "gemini-2.0-flash-exp-image-generation",
+    model = "gemini-2.5-flash-image",
     apiKey = process.env.GEMINI_API_KEY ?? process.env.GOOGLE_API_KEY,
   ) {
     if (!apiKey) {
@@ -73,7 +73,7 @@ export class GeminiProvider implements ImageProvider {
     const resp = (await ai.models.generateContent({
       model: this.model,
       contents: prompt,
-      config: { responseModalities: ["Text", "Image"] },
+      config: { responseModalities: ["IMAGE", "TEXT"] },
     })) as {
       candidates?: Array<{
         content?: {

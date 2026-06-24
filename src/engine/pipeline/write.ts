@@ -15,7 +15,7 @@ import { firstSentence, isoToday, slugify } from "../util.js";
 // placeholders to `[thing]` so the MDX build doesn't choke.
 const PLACEHOLDER_RE = /\{([a-zA-Z_][a-zA-Z0-9_ ,.'"-]{0,80})\}/g;
 
-function sanitizeMdxBraces(body: string): string {
+export function sanitizeMdxBraces(body: string): string {
   const out: string[] = [];
   let inFence = false;
   for (const line of body.split("\n")) {

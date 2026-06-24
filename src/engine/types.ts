@@ -61,7 +61,8 @@ export type LlmSettings = z.infer<typeof LlmSettings>;
 export const ImageSettings = z.object({
   enabled: z.boolean().default(false),
   provider: z.literal("gemini").default("gemini"),
-  model: z.string().default("gemini-2.0-flash-exp-image-generation"),
+  // "Nano Banana" — stable Gemini image model. Newer: gemini-3.1-flash-image.
+  model: z.string().default("gemini-2.5-flash-image"),
   /** How many inline images (in addition to the hero) to generate. */
   inlineCount: z.number().int().min(0).max(4).default(1),
   /** Free-text art-direction hint applied to every prompt. */
