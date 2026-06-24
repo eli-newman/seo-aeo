@@ -4,12 +4,34 @@
 > questions, and your site gets a well-optimized article every week or
 > two — forever — as a pull request you review and merge.
 
-Built for any content-driven repo (Next.js, Astro, Remix, static) that
-renders Markdown/MDX from a content directory.
+Built for any content-driven repo (Next.js, Astro, Remix, static).
+
+## Two ways to use it
+
+### 1. Hand it to your coding agent (recommended)
+
+The site doesn't even need a blog yet. Point your agent (Claude Code,
+Cursor, Copilot…) at the repo and the **[PLAYBOOK](./PLAYBOOK.md)**:
+
+> "Make this site SEO and AEO optimized — follow
+> `node_modules/@elinewman/seo-aeo/PLAYBOOK.md`. Do Phases 0–2 now (no keys
+> needed) and give me the report. If I paste an `ANTHROPIC_API_KEY` and a
+> GitHub token, also do Phase 3."
+
+The agent then runs, on its own:
+
+- **Phase 0 — Discover:** detect the stack, find whether a blog exists.
+- **Phase 1 — Clean sweep:** fix on-site SEO + AEO (metadata, sitemap,
+  robots, JSON-LD, **`llms.txt`**, AI-crawler rules, CWV) — pure code, no keys.
+- **Phase 2 — Build the blog** *if missing*, tailored to the stack
+  (per-stack [recipes](./recipes/) + a shared [frontmatter contract](./recipes/frontmatter-contract.md)).
+- **Phase 3 — Automate** (needs the 2 keys): wire the recurring engine below.
+
+### 2. Run the engine directly (if you already have a blog)
 
 ```bash
 npm install -D @elinewman/seo-aeo
-npx seo-aeo init        # interview + wire up the cron
+npx seo-aeo init            # interview + wire up the cron
 npx seo-aeo run --dry-run   # preview the first article locally
 ```
 
