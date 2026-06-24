@@ -1,0 +1,9 @@
+{
+  "name": "my-next-site",
+  "version": "1.0.0",
+  "homepage": "https://my-next-site.example.com",
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^19.0.0"
+  }
+}
