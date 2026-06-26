@@ -31,13 +31,23 @@ _Handoff note. Where the project stands and what's left, in priority order._
 
 ## What's left (priority order)
 
-### A. Finish simple-followup → actually autonomous
-The engine is proven but **not yet running on a schedule** there.
-1. Add `.github/workflows/seo-aeo.yml` (the cron) to simple-followup —
-   never generated (config was hand-written). Without it nothing runs.
-2. Set the repo secret `ANTHROPIC_API_KEY` in simple-followup's GitHub
-   settings — do this with the **rotated** key (see B).
-3. Decide PR #1 — close it (pre-fix demo, thin keywords) or keep.
+### A. simple-followup autonomy — ✅ DONE & verified live
+The biweekly cron is running in GitHub Actions and **opened PR #2 on its
+own** (audit SEO 90 / AEO 100). What was needed (now done):
+- `.github/workflows/seo-aeo.yml` committed to `main` (installs the engine
+  via `npx -y github:eli-newman/seo-aeo`; the engine repo is now **public**).
+- Repo secret `ANTHROPIC_API_KEY` set (currently the exposed key — **rotate
+  + re-set**, see B).
+- **CI gotcha fixed:** enabled Settings→Actions→"Allow GitHub Actions to
+  create and approve pull requests" (was off → `gh pr create` 403'd the
+  first run). API: `actions/permissions/workflow` `can_approve_pull_request_reviews=true`.
+- **Dedup fixed:** ranker now dedupes against drafts too, so merging a PR
+  moves the next run to a fresh topic (was repeating the top topic).
+
+Remaining housekeeping:
+- **Decide PR #1 and #2** — both are the same demo topic; close one/both.
+- Cadence is biweekly (odd ISO weeks skipped); next scheduled run is the
+  next even-week Monday 14:00 UTC. Trigger anytime: Actions tab → Run workflow.
 
 ### B. Security
 - **Rotate the Anthropic key** — it was pasted in a chat transcript.
