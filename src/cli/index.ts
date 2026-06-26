@@ -55,6 +55,18 @@ program
     await runList(process.cwd());
   });
 
+program
+  .command("install-skills")
+  .description(
+    "Install the guided /seo-aeo skill suite into this project's .claude/skills",
+  )
+  .option("-g, --global", "install into ~/.claude/skills instead", false)
+  .option("-f, --force", "overwrite existing skill dirs", false)
+  .action(async (opts: { global: boolean; force: boolean }) => {
+    const { runInstallSkills } = await import("./commands/install-skills.js");
+    await runInstallSkills(process.cwd(), opts);
+  });
+
 program.parseAsync(process.argv).catch((err: unknown) => {
   log.error(err instanceof Error ? err.message : String(err));
   process.exit(1);

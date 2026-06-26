@@ -6,9 +6,25 @@
 
 Built for any content-driven repo (Next.js, Astro, Remix, static).
 
-## Two ways to use it
+## Three ways to use it
 
-### 1. Hand it to your coding agent (recommended)
+### 1. Guided skill suite — `/seo-aeo` (easiest, < 10 min hands-on)
+
+Install the skill suite into any project, then let the orchestrator walk you
+through the whole thing with gates and checkpoints:
+
+```bash
+npx -y github:eli-newman/seo-aeo install-skills   # → .claude/skills/
+# then, in your agent:
+/seo-aeo
+```
+
+`/seo-aeo` front-loads every decision up front (keys, cadence), then runs
+8 gated phases on its own: **preflight → discover → measure → on-site fix →
+build blog (if missing) → engine → verify**. Each is also a standalone skill
+(`/seo-aeo-measure`, `/seo-aeo-onsite`, …) you can run à la carte.
+
+### 2. Hand it to your coding agent (the raw playbook)
 
 The site doesn't even need a blog yet. Point your agent (Claude Code,
 Cursor, Copilot…) at the repo and the **[PLAYBOOK](./PLAYBOOK.md)**:
@@ -27,7 +43,7 @@ The agent then runs, on its own:
   (per-stack [recipes](./recipes/) + a shared [frontmatter contract](./recipes/frontmatter-contract.md)).
 - **Phase 3 — Automate** (needs the 2 keys): wire the recurring engine below.
 
-### 2. Run the engine directly (if you already have a blog)
+### 3. Run the engine directly (if you already have a blog)
 
 ```bash
 npm install -D @elinewman/seo-aeo
