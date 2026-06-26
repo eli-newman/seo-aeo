@@ -38,3 +38,7 @@ Ask the user these now and record the answers for later phases:
 
 Env is ready and you have: repo path, site URL, automation yes/no (+ key if
 yes), cadence, and the site description. Hand these to the orchestrator.
+
+---
+
+**Next →** `seo-aeo-discover`

@@ -54,22 +54,38 @@ Adapt accordingly — the *requirements* below are framework-agnostic.
 
 This is the half most sites miss.
 
-- [ ] **`llms.txt`** at the site root — a markdown map of the site for LLMs:
-      what the site is, key pages with one-line descriptions, and links.
-      (See the template at the bottom.)
-- [ ] **Allow the AI crawlers** you want in `robots.txt` (or confirm they
-      aren't blocked): `GPTBot`, `ChatGPT-User`, `ClaudeBot`,
-      `PerplexityBot`, `Google-Extended`. Decide *with the user* if they
-      want to allow training crawlers; at minimum allow the retrieval ones.
+- [ ] **Allow the CITATION crawlers** in `robots.txt` — these are what drive
+      AI citation (distinct from *training* bots). Don't accidentally block
+      them with blanket bot rules / Cloudflare bot protection:
+      `OAI-SearchBot`, `ChatGPT-User`, `Claude-SearchBot`, `Claude-User`,
+      `PerplexityBot`, `Perplexity-User`, `Googlebot`, `Bingbot`, `Applebot`.
+      (Template at the bottom.) Training bots — `GPTBot`, `ClaudeBot` — are a
+      *separate, optional* decision and do NOT affect citation.
+- [ ] **Don't believe the `Google-Extended` myth.** It's a training opt-out
+      token, **not a crawler** — blocking it does NOT remove you from AI
+      Overviews (those use the main Google index). Never block `Googlebot`.
+- [ ] **Server-rendered content (SSR/SSG) — the #1 silent AEO killer.** As of
+      2026, **no major AI crawler executes JavaScript.** If the primary
+      content only appears after client-side JS (SPA, CSR), it is **invisible**
+      to AI crawlers. Verify the answer text is in the **raw HTML**
+      (`curl <url> | grep "<a key sentence>"`). Same for content hidden behind
+      **tabs/accordions/click-to-reveal** — flag it as a defect.
 - [ ] **Semantic HTML + heading hierarchy:** one `<h1>` per page, no skipped
       levels, headings are descriptive (questions/claims, not "Section 1").
-- [ ] **Quotable content:** key answers appear high on the page in
-      self-contained sentences (LLMs lift paragraphs, not whole pages).
-      On the homepage/landing, make sure the "what is this / who is it for /
-      what does it cost" answers are in plain text, not trapped in images.
+- [ ] **Quotable passages (evidence-backed).** LLMs chunk pages and quote the
+      strongest passage, not the page. So: a **direct-answer block of ~40–75
+      words** per key question (cited ~3× more), **self-contained sections**
+      (restate the subject, no "as mentioned above"), short paragraphs, and a
+      **visible last-updated date** (content >~3 months old is cited less).
+- [ ] **Citation drivers in the copy (Princeton GEO study):** include **inline
+      source citations** (+115% visibility), **statistics** (+40%), and
+      **attributable quotations**. **Keyword stuffing scores WORSE than
+      baseline — never do it.**
 - [ ] **Descriptive alt text** on every meaningful image (not "image1.png").
-- [ ] Make sure critical copy is **server-rendered text**, not baked into
-      images or only injected client-side where crawlers may miss it.
+- [ ] **`llms.txt`** at the root — 🔵 **optional, low-yield.** A 300k-domain
+      study found no measurable citation lift and no major engine reliably
+      fetches it; it mainly helps *developer-doc / coding-agent* discovery.
+      Add it if cheap, but don't treat it as essential AEO. (Template below.)
 
 ## 6. Core Web Vitals — performance IS SEO 🔴
 
@@ -132,23 +148,43 @@ who it's for, what makes it different. Specific, no marketing fluff.>
 - <email / support link>
 ```
 
-## AI-crawler `robots.txt` block (retrieval crawlers)
+## AI-crawler `robots.txt` block (CITATION crawlers — allow these)
+
+These are the search/retrieval/user-fetch agents that drive AI citation.
+Allowing them is independent of any decision to block *training* bots
+(`GPTBot`, `ClaudeBot`, `CCBot`).
 
 ```
-User-agent: GPTBot
+# OpenAI (ChatGPT Search + live fetch)
+User-agent: OAI-SearchBot
 Allow: /
-
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: ClaudeBot
+# Anthropic (Claude search + live fetch)
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Claude-User
 Allow: /
 
+# Perplexity
 User-agent: PerplexityBot
 Allow: /
+User-agent: Perplexity-User
+Allow: /
 
-User-agent: Google-Extended
+# Google (AI Overviews use the MAIN index — never block Googlebot),
+# Bing (Copilot), Apple (Siri/Spotlight)
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: Applebot
 Allow: /
 
 Sitemap: https://<site>/sitemap.xml
 ```
+
+> Note: some crawlers (Perplexity's undeclared fetchers, Bytespider, xAI's
+> Grok) ignore robots.txt — to actually *block* a bot you need WAF/firewall
+> rules, not robots.txt. robots.txt only reliably *allows*.

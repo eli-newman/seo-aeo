@@ -1,0 +1,14 @@
+{
+  "name": "seo-aeo-tools",
+  "owner": { "name": "Eli Newman" },
+  "plugins": [
+    {
+      "name": "seo-aeo",
+      "source": "./",
+      "description": "SEO + AEO optimization skill suite: the /seo-aeo orchestrator + 7 gated task skills.",
+      "version": "0.1.0",
+      "license": "MIT",
+      "homepage": "https://github.com/eli-newman/seo-aeo#readme"
+    }
+  ]
+}

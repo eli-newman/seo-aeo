@@ -40,3 +40,7 @@ Site builds; every page has a unique title + description; `robots.txt`,
 re-measured scores hit target (SEO ≥ 95; LCP ≤ 2.5s / CLS ≤ 0.1 / INP ≤ 200ms)
 or misses are noted with cause. Commit `seo-aeo: on-site SEO + AEO clean sweep`
 and report before/after.
+
+---
+
+**Next →** `seo-aeo-blog`

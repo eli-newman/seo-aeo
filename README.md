@@ -4,27 +4,38 @@
 > questions, and your site gets a well-optimized article every week or
 > two — forever — as a pull request you review and merge.
 
-Built for any content-driven repo (Next.js, Astro, Remix, static).
+**On-site SEO/AEO optimization works on any stack** (it's just metadata,
+robots, sitemap, JSON-LD, content). The **recurring article engine** needs an
+MDX-in-git-repo blog — **Next.js and Astro have ready recipes**; other
+MDX/static setups adapt the Next recipe; WordPress/Ghost/CMS and non-GitHub
+hosts get the on-site optimization but not the auto-article engine yet.
 
 ## Three ways to use it
 
 ### 1. Guided skill suite — `/seo-aeo` (easiest, < 10 min hands-on)
 
-Install the skill suite into any project, then let the orchestrator walk you
-through the whole thing with gates and checkpoints:
+**Claude Code** — install the suite as a plugin (two slash commands):
 
-```bash
-npx -y github:eli-newman/seo-aeo install-skills   # → .claude/skills/
-# then, in your agent:
+```text
+/plugin marketplace add eli-newman/seo-aeo
+/plugin install seo-aeo@seo-aeo-tools
 /seo-aeo
 ```
+
+Or copy the skills into one project: `npx -y github:eli-newman/seo-aeo install-skills`.
 
 `/seo-aeo` front-loads every decision up front (keys, cadence), then runs
 8 gated phases on its own: **preflight → discover → measure → on-site fix →
 build blog (if missing) → engine → verify**. Each is also a standalone skill
 (`/seo-aeo-measure`, `/seo-aeo-onsite`, …) you can run à la carte.
 
-### 2. Hand it to your coding agent (the raw playbook)
+### 2. Hand it to your coding agent (any agent, the raw playbook)
+
+Every agent (Cursor, Copilot, Windsurf, Aider, Claude Code…) reads
+**[AGENTS.md](AGENTS.md)** at the repo root — it states the mission, the
+safety contract (branch-only, dry-run-first, never auto-push), and points at
+the runbook. Just tell your agent: *"optimize my site — follow this repo's
+AGENTS.md."*
 
 The site doesn't even need a blog yet. Point your agent (Claude Code,
 Cursor, Copilot…) at the repo and the **[PLAYBOOK](./PLAYBOOK.md)**:

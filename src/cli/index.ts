@@ -1,8 +1,35 @@
 #!/usr/bin/env node
 import { Command } from "commander";
+import { readFileSync, existsSync } from "node:fs";
+import path from "node:path";
+import os from "node:os";
 
 import { VERSION } from "../index.js";
 import { log } from "../engine/log.js";
+
+/**
+ * Load ~/.seo-aeo.env (and ./.env) into process.env without a dep, so the
+ * documented "put your key in ~/.seo-aeo.env" flow actually works. Existing
+ * env vars win — never override what's already set (e.g. CI secrets).
+ */
+function loadEnvFiles(): void {
+  const files = [
+    path.join(os.homedir(), ".seo-aeo.env"),
+    path.join(process.cwd(), ".env"),
+  ];
+  for (const file of files) {
+    if (!existsSync(file)) continue;
+    for (const line of readFileSync(file, "utf8").split("\n")) {
+      const m = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
+      if (!m) continue;
+      const key = m[1]!;
+      if (process.env[key]) continue;
+      process.env[key] = m[2]!.replace(/^['"]|['"]$/g, "");
+    }
+  }
+}
+
+loadEnvFiles();
 
 const program = new Command();
 

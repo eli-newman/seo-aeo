@@ -32,3 +32,7 @@ See [MEASURE.md](MEASURE.md) for the full tool flow, thresholds, and fallbacks.
 Baseline (or post-fix) scores captured and recorded for the report. Out-of-scope
 misses (slow host, required heavy third-party) are noted with cause + fix, not
 silently passed.
+
+---
+
+**Next →** `seo-aeo-onsite`

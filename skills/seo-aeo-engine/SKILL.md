@@ -43,3 +43,7 @@ wants automation.
 
 `npx seo-aeo run --dry-run` produces an **audit-passing** article
 (SEO + AEO) whose MDX renders in the blog. Cron + secret + PR permission set.
+
+---
+
+**Next →** `seo-aeo-verify`

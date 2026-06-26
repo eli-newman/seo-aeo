@@ -37,3 +37,7 @@ Drop a sample post (contract frontmatter, 2+ faqs), run the site, confirm: the
 index lists it, the post renders, the `<h1>` comes from `title`, and Article +
 FAQPage JSON-LD appear in the page source — **and the live URL returns 200 to
 an unauthenticated request**. Delete the sample. Commit `seo-aeo: add blog`.
+
+---
+
+**Next →** `seo-aeo-engine`

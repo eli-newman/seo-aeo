@@ -5,6 +5,12 @@
   "type": "module",
   "license": "MIT",
   "author": "Eli Newman",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eli-newman/seo-aeo.git"
+  },
+  "homepage": "https://github.com/eli-newman/seo-aeo#readme",
+  "bugs": "https://github.com/eli-newman/seo-aeo/issues",
   "keywords": [
     "seo",
     "aeo",

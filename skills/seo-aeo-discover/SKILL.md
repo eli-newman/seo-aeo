@@ -32,3 +32,7 @@ You can state in one paragraph: framework, where pages/assets live, whether a
 blog exists, **whether it's publicly crawlable + committed to the deploy
 branch**, whether the tree is clean, and what SEO/AEO is already in place.
 Flag the auth-gated and uncommitted-blog cases loudly — they decide Phase 5.
+
+---
+
+**Next →** `seo-aeo-measure`

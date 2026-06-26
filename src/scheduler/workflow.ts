@@ -7,6 +7,13 @@ import type { Cadence } from "../engine/types.js";
 
 export const WEEKLY_CRON = "0 14 * * 1"; // Mondays 14:00 UTC
 
+/**
+ * Where CI installs the engine from. The repo is public, so this
+ * `github:` spec works for everyone with zero auth. If/when the package is
+ * published to npm, change this one constant to "@elinewman/seo-aeo".
+ */
+export const ENGINE_PACKAGE_SPEC = "github:eli-newman/seo-aeo";
+
 export function cronFor(_frequency: Cadence["frequency"]): string {
   // Both cadences fire weekly on the schedule; biweekly is gated in-job.
   return WEEKLY_CRON;
@@ -14,9 +21,9 @@ export function cronFor(_frequency: Cadence["frequency"]): string {
 
 export function workflowYaml(
   cadence: Cadence,
-  // Install source for the engine. Defaults to the npm name; pass a
-  // `github:owner/repo` spec while the package isn't published to npm.
-  packageSpec = "@elinewman/seo-aeo",
+  // Install source for the engine. Defaults to the working public github
+  // spec so every generated workflow actually runs in CI.
+  packageSpec = ENGINE_PACKAGE_SPEC,
 ): string {
   const cron = cadence.cron || WEEKLY_CRON;
   const biweekly = cadence.frequency === "biweekly";

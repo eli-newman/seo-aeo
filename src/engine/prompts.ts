@@ -34,9 +34,15 @@ The audit stage scores against this list.
 6. FAQ SECTION at the end: \`## FAQ\` with 3-5 entries. Each question an H3,
    each answer 2-4 sentences, quotable in isolation, repeating key nouns
    instead of pronouns. Mirror the frontmatter \`faqs\` array.
-7. SPECIFIC NUMBERS BEAT VAGUE CLAIMS. Real numbers, timeframes, amounts.
-   Don't fabricate; mark estimates as estimates ("in our testing").
-8. ONE QUOTABLE CLAIM PER SECTION — a sentence specific enough to screenshot.
+7. CITATION DRIVERS (these measurably raise AI-citation rates — use them).
+   Include real STATISTICS with their numbers; cite credible SOURCES inline
+   for facts/stats (with a link); use short attributable QUOTATIONS where they
+   fit. Don't fabricate — mark estimates as estimates ("in our testing").
+   Keyword stuffing is counterproductive — never repeat a phrase unnaturally.
+8. PASSAGE SHAPE FOR EXTRACTION. LLMs quote the strongest self-contained
+   passage, not the page. Lead each key question with a ~40-75 word
+   direct-answer block. Keep paragraphs short. One screenshot-worthy claim
+   per section.
 9. JSON-LD READINESS. Support Article (always), FAQPage, HowTo (when steps
    exist). Never emit JSON-LD that contradicts the rendered content.
 10. INTERNAL LINKS: deliberate, not decorative. 1-3 total, anchor text

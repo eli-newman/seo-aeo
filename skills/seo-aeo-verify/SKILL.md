@@ -35,3 +35,7 @@ post URL returns 200 to an anonymous request; the page source contains Article
 State: what's optimized (before/after scores), whether automation is live and
 the cadence, how to pause it (disable the workflow), and honest gaps (off-page
 authority — reviews/mentions/links — is out of scope and partly manual).
+
+---
+
+**Done.** This is the last phase — report the final summary.
