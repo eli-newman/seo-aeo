@@ -5,6 +5,8 @@ export interface RunOptions {
   dryRun: boolean;
   /** commander's `--no-images` sets this to false. */
   images: boolean;
+  /** Target a specific keyword instead of auto-ranking. */
+  keyword?: string;
 }
 
 /** Generate one article. */
@@ -19,6 +21,7 @@ export async function runCommand(
   const result = await runOnce(ctx, {
     dryRun: opts.dryRun,
     images: opts.images,
+    keyword: opts.keyword,
   });
 
   if (!result.audit.passed) {

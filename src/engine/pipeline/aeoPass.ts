@@ -89,6 +89,7 @@ function buildArticleJsonLd(
       "@type": "Organization",
       name: project.name,
       logo: { "@type": "ImageObject", url: `${siteOrigin(project)}/opengraph-image` },
+      ...(project.sameAs.length ? { sameAs: project.sameAs } : {}),
     },
     ...(fm.image ? { image: `${siteOrigin(project)}${fm.image}` } : {}),
   };

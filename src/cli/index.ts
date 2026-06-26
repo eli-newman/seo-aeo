@@ -27,10 +27,16 @@ program
   .description("Generate one article")
   .option("--dry-run", "write a preview locally, do not open a PR", false)
   .option("--no-images", "skip image generation for this run")
-  .action(async (opts: { dryRun: boolean; images: boolean }) => {
-    const { runCommand } = await import("./commands/run.js");
-    await runCommand(process.cwd(), opts);
-  });
+  .option(
+    "-k, --keyword <phrase>",
+    'target a specific keyword instead of auto-ranking (e.g. "tool A vs tool B")',
+  )
+  .action(
+    async (opts: { dryRun: boolean; images: boolean; keyword?: string }) => {
+      const { runCommand } = await import("./commands/run.js");
+      await runCommand(process.cwd(), opts);
+    },
+  );
 
 program
   .command("approve")

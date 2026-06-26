@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { rankTopics } from "../src/engine/pipeline/rank.js";
+import { rankTopics, topicFromKeyword } from "../src/engine/pipeline/rank.js";
 import { ProjectConfig, type FeedItem, type KeywordTarget } from "../src/engine/types.js";
 
 const project = ProjectConfig.parse({
@@ -41,5 +41,21 @@ describe("rankTopics", () => {
 
   it("returns empty when there are no keywords", () => {
     expect(rankTopics([], [], "/root", project)).toEqual([]);
+  });
+});
+
+describe("topicFromKeyword (--keyword targeting)", () => {
+  it("reuses a bank entry when the keyword matches", () => {
+    const t = topicFromKeyword("Best Analytics Tool", keywords);
+    expect(t.keyword.keyword).toBe("best analytics tool");
+    expect(t.keyword.intent).toBe("commercial"); // from the bank
+    expect(t.score).toBe(100);
+  });
+
+  it("synthesizes a topic + infers intent for an ad-hoc keyword", () => {
+    const t = topicFromKeyword("simple follow up vs follow up boss", []);
+    expect(t.keyword.keyword).toBe("simple follow up vs follow up boss");
+    expect(t.keyword.intent).toBe("transactional"); // "vs" → transactional
+    expect(t.feedItem).toBeNull();
   });
 });

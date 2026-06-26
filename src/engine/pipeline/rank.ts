@@ -132,6 +132,41 @@ function evergreenAngle(k: KeywordTarget): string {
   return `A practical, no-fluff explainer on ${kw}.`;
 }
 
+/** Infer intent from the phrasing of an ad-hoc targeted keyword. */
+function inferIntent(keyword: string): KeywordIntent {
+  const k = keyword.toLowerCase();
+  if (/\bvs\b|versus|\balternatives?\b/.test(k)) return "transactional";
+  if (/\bbest\b|\breview\b|\bpricing\b|\bcheapest\b/.test(k)) return "commercial";
+  return "informational";
+}
+
+/**
+ * Build a Topic for an explicitly-targeted keyword (the `--keyword` flag),
+ * bypassing the ranker. Reuses the keyword's bank entry if present.
+ */
+export function topicFromKeyword(
+  keyword: string,
+  bank: KeywordTarget[],
+): Topic {
+  const found = bank.find(
+    (k) => k.keyword.toLowerCase() === keyword.toLowerCase(),
+  );
+  const kw: KeywordTarget = found ?? {
+    keyword,
+    intent: inferIntent(keyword),
+    volume: null,
+    difficulty: null,
+    notes: "",
+  };
+  return {
+    feedItem: null,
+    keyword: kw,
+    angle: evergreenAngle(kw),
+    score: 100,
+    reason: "explicitly targeted via --keyword",
+  };
+}
+
 export interface RankOptions {
   topK?: number;
   now?: Date;

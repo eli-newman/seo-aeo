@@ -113,6 +113,13 @@ export const ProjectConfig = z.object({
   audit: AuditThresholds.default({}),
   cadence: Cadence.default({}),
   author: z.string().default("Editorial Team"),
+  /**
+   * Profile/listing URLs for the publishing org (X, LinkedIn, ProductHunt,
+   * G2, Crunchbase, Wikidata…). Emitted as schema.org `sameAs` so answer
+   * engines resolve all your mentions to one trusted entity. Off-page
+   * authority signal — fill with real URLs only.
+   */
+  sameAs: z.array(z.string()).default([]),
 });
 export type ProjectConfig = z.infer<typeof ProjectConfig>;
 

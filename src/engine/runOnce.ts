@@ -22,7 +22,7 @@ import {
   type ImageProvider,
 } from "./providers/image.js";
 import { fetchFeeds } from "./pipeline/ingest.js";
-import { rankTopics } from "./pipeline/rank.js";
+import { rankTopics, topicFromKeyword } from "./pipeline/rank.js";
 import { draftOutline } from "./pipeline/outline.js";
 import { draftArticle, countWords } from "./pipeline/write.js";
 import { applySeo } from "./pipeline/seoPass.js";
@@ -40,6 +40,8 @@ export interface RunOptions {
   dryRun?: boolean;
   /** Override the config's images setting for this run (false = off). */
   images?: boolean;
+  /** Target a specific keyword instead of auto-ranking (e.g. a "vs" page). */
+  keyword?: string;
 }
 
 export interface RunResult {
@@ -153,18 +155,26 @@ export async function runOnce(
   ctx: EngineContext,
   options: RunOptions = {},
 ): Promise<RunResult> {
-  log.step(`ingest — ${ctx.feeds.length} feed(s)`);
-  const items = await fetchFeeds(ctx.feeds);
+  let topic: Topic;
+  if (options.keyword) {
+    // Targeted run — skip ranking, write about this exact keyword. Used for
+    // comparison/"vs" pages and on-demand topics.
+    topic = topicFromKeyword(options.keyword, ctx.keywords);
+    log.step(`targeted topic: "${topic.keyword.keyword}" (${topic.keyword.intent})`);
+  } else {
+    log.step(`ingest — ${ctx.feeds.length} feed(s)`);
+    const items = await fetchFeeds(ctx.feeds);
 
-  log.step(`rank — ${items.length} items × ${ctx.keywords.length} keywords`);
-  const topics = rankTopics(items, ctx.keywords, ctx.root, ctx.project);
-  if (topics.length === 0) {
-    throw new Error(
-      "No topics to write. Add keywords to .seo-aeo/keywords.json (or all are already covered).",
-    );
+    log.step(`rank — ${items.length} items × ${ctx.keywords.length} keywords`);
+    const topics = rankTopics(items, ctx.keywords, ctx.root, ctx.project);
+    if (topics.length === 0) {
+      throw new Error(
+        "No topics to write. Add keywords to .seo-aeo/keywords.json (or all are already covered).",
+      );
+    }
+    topic = topics[0]!;
+    log.info(`topic: "${topic.keyword.keyword}" (score ${topic.score})`);
   }
-  const topic = topics[0]!;
-  log.info(`topic: "${topic.keyword.keyword}" (score ${topic.score})`);
 
   log.step("outline");
   const outline = await draftOutline(topic, ctx);
