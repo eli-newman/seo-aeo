@@ -12,7 +12,12 @@ export function cronFor(_frequency: Cadence["frequency"]): string {
   return WEEKLY_CRON;
 }
 
-export function workflowYaml(cadence: Cadence): string {
+export function workflowYaml(
+  cadence: Cadence,
+  // Install source for the engine. Defaults to the npm name; pass a
+  // `github:owner/repo` spec while the package isn't published to npm.
+  packageSpec = "@elinewman/seo-aeo",
+): string {
   const cron = cadence.cron || WEEKLY_CRON;
   const biweekly = cadence.frequency === "biweekly";
 
@@ -61,6 +66,6 @@ ${gate}      - name: Generate and open PR${runIf}
         run: |
           git config user.name "seo-aeo[bot]"
           git config user.email "seo-aeo@users.noreply.github.com"
-          npx -y @elinewman/seo-aeo run
+          npx -y ${packageSpec} run
 `;
 }

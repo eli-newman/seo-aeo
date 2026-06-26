@@ -19,6 +19,7 @@ export {
   type LoadedProject,
 } from "./engine/config.js";
 export { log } from "./engine/log.js";
+export { workflowYaml, cronFor } from "./scheduler/workflow.js";
 
 // Engine surface for embedding in custom runners.
 export { runOnce, createContext, type RunOptions, type RunResult } from "./engine/runOnce.js";
