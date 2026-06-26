@@ -99,12 +99,17 @@ function recencyBonus(item: FeedItem, now: Date): number {
 }
 
 function coveredSlugs(root: string, project: ProjectConfig): Set<string> {
-  const dir = path.join(root, project.layout.postsPath);
-  if (!existsSync(dir)) return new Set();
   const out = new Set<string>();
-  for (const f of readdirSync(dir)) {
-    if (f.endsWith(".mdx") || f.endsWith(".md")) {
-      out.add(f.replace(/\.mdx?$/, "").toLowerCase());
+  // Dedupe against BOTH published posts and existing drafts — otherwise a
+  // scheduled run keeps re-picking the same top topic until a draft is
+  // manually promoted. Merging a draft PR is now enough to move on.
+  for (const rel of [project.layout.postsPath, project.layout.draftsPath]) {
+    const dir = path.join(root, rel);
+    if (!existsSync(dir)) continue;
+    for (const f of readdirSync(dir)) {
+      if (f.endsWith(".mdx") || f.endsWith(".md")) {
+        out.add(f.replace(/\.mdx?$/, "").toLowerCase());
+      }
     }
   }
   return out;
