@@ -1,5 +1,6 @@
 {
   "name": "seo-aeo-tools",
+  "description": "SEO + AEO website optimization tools: the /seo-aeo orchestrator and its gated task skills.",
   "owner": { "name": "Eli Newman" },
   "plugins": [
     {
