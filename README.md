@@ -4,6 +4,8 @@
 > questions, and your site gets a well-optimized article every week or
 > two — forever — as a pull request you review and merge.
 
+**🌐 Website + docs: [seo-aeo-site.vercel.app](https://seo-aeo-site.vercel.app)** — itself built SEO/AEO-optimized as a live showcase.
+
 **On-site SEO/AEO optimization works on any stack** (it's just metadata,
 robots, sitemap, JSON-LD, content). The **recurring article engine** needs an
 MDX-in-git-repo blog — **Next.js and Astro have ready recipes**; other
