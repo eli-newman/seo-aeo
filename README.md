@@ -1,5 +1,9 @@
 # seo-aeo
 
+<p align="center">
+  <img src="https://seo-aeo-site.vercel.app/hero.png" alt="Pixel-art map of the journey from SEO to AEO: ranking charts and reviews, the SEO traffic peak, an entity path to the AEO/GEO answer-engine nexus, LLMs, and a knowledge-graph garden of FAQ, Article, and How-To content." width="820">
+</p>
+
 > Drop-in SEO **and** AEO content engine. Run one command, answer a few
 > questions, and your site gets a well-optimized article every week or
 > two — forever — as a pull request you review and merge.
