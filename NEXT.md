@@ -5,7 +5,7 @@ _Handoff note. Where the project stands and what's left, in priority order._
 ## Where it stands (proven, 2026-06)
 
 - **Repo:** github.com/eli-newman/seo-aeo (private). Installable via
-  `npm i github:eli-newman/seo-aeo` (builds on install via `prepare`).
+  `npm i seo-aeo` (builds on install via `prepare`).
 - **Proven live** on simple-followup: generated real audit-passing articles
   (SEO 90 / AEO 100), opened a real PR (eli-newman/simple-followup#1).
 - **24 tests** green; build + lint + typecheck clean.
@@ -35,7 +35,7 @@ _Handoff note. Where the project stands and what's left, in priority order._
 The biweekly cron is running in GitHub Actions and **opened PR #2 on its
 own** (audit SEO 90 / AEO 100). What was needed (now done):
 - `.github/workflows/seo-aeo.yml` committed to `main` (installs the engine
-  via `npx -y github:eli-newman/seo-aeo`; the engine repo is now **public**).
+  via `npx -y seo-aeo`; the engine repo is now **public**).
 - Repo secret `ANTHROPIC_API_KEY` set (currently the exposed key — **rotate
   + re-set**, see B).
 - **CI gotcha fixed:** enabled Settings→Actions→"Allow GitHub Actions to

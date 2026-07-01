@@ -5,7 +5,7 @@
 > One interactive onboarding, one cron, one human approval — forever.
 
 ```bash
-npm install -D @elinewman/seo-aeo
+npm install -D seo-aeo
 npx seo-aeo init      # interview + wire up cron
 # ...every week or two, a PR appears with a new optimized article
 ```
@@ -65,7 +65,7 @@ weekly/biweekly GitHub Actions cron.
 ## 3. Architecture
 
 ```
-@elinewman/seo-aeo (the package)
+seo-aeo (the package)
 │
 ├── CLI  (bin: seo-aeo)
 │   ├── init       interactive onboarding wizard
@@ -185,7 +185,7 @@ seo-aeo list                 # show drafts + posts
 seo-aeo --version | --help
 ```
 
-Programmatic API: `import { runOnce, loadConfig } from '@elinewman/seo-aeo'`.
+Programmatic API: `import { runOnce, loadConfig } from 'seo-aeo'`.
 
 ---
 

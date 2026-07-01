@@ -13,7 +13,7 @@ wants automation.
 
 1. **Install + onboard** (in the target repo):
    ```bash
-   npm install -D github:eli-newman/seo-aeo
+   npm install -D seo-aeo
    ANTHROPIC_API_KEY=… npx seo-aeo init   # interview → keywords.json, voice.md, config, cron
    ```
    Pre-answer the interview from what preflight/discover gathered.
@@ -30,7 +30,7 @@ wants automation.
      -F default_workflow_permissions=write -F can_approve_pull_request_reviews=true
    ```
 5. **The engine repo must be installable in CI** — it's public
-   (`github:eli-newman/seo-aeo`) so `npx -y github:eli-newman/seo-aeo` works
+   (`seo-aeo`) so `npx -y seo-aeo` works
    with no auth. (Private → add a PAT secret instead.)
 
 ## Known-good behavior to confirm

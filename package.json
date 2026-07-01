@@ -1,5 +1,5 @@
 {
-  "name": "@elinewman/seo-aeo",
+  "name": "seo-aeo",
   "version": "0.1.0",
   "description": "Drop-in SEO + AEO content engine: writes an optimized MDX article for your site every week or two, forever, via GitHub Actions.",
   "type": "module",

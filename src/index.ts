@@ -1,5 +1,5 @@
 /**
- * @elinewman/seo-aeo — programmatic API.
+ * seo-aeo — programmatic API.
  *
  * The CLI (`seo-aeo`) is the primary surface, but the engine is also
  * importable for embedding in custom scripts or other runners.

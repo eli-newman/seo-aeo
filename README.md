@@ -1,4 +1,4 @@
-# @elinewman/seo-aeo
+# seo-aeo
 
 > Drop-in SEO **and** AEO content engine. Run one command, answer a few
 > questions, and your site gets a well-optimized article every week or
@@ -24,7 +24,7 @@ hosts get the on-site optimization but not the auto-article engine yet.
 /seo-aeo
 ```
 
-Or copy the skills into one project: `npx -y github:eli-newman/seo-aeo install-skills`.
+Or copy the skills into one project: `npx -y seo-aeo install-skills`.
 
 `/seo-aeo` front-loads every decision up front (keys, cadence), then runs
 8 gated phases on its own: **preflight → discover → measure → on-site fix →
@@ -43,7 +43,7 @@ The site doesn't even need a blog yet. Point your agent (Claude Code,
 Cursor, Copilot…) at the repo and the **[PLAYBOOK](./PLAYBOOK.md)**:
 
 > "Make this site SEO and AEO optimized — follow
-> `node_modules/@elinewman/seo-aeo/PLAYBOOK.md`. Do Phases 0–2 now (no keys
+> `node_modules/seo-aeo/PLAYBOOK.md`. Do Phases 0–2 now (no keys
 > needed) and give me the report. If I paste an `ANTHROPIC_API_KEY` and a
 > GitHub token, also do Phase 3."
 
@@ -59,7 +59,7 @@ The agent then runs, on its own:
 ### 3. Run the engine directly (if you already have a blog)
 
 ```bash
-npm install -D @elinewman/seo-aeo
+npm install -D seo-aeo
 npx seo-aeo init            # interview + wire up the cron
 npx seo-aeo run --dry-run   # preview the first article locally
 ```
@@ -102,7 +102,7 @@ answers, FAQ, and JSON-LD.
 ### 1. Install + onboard
 
 ```bash
-npm install -D @elinewman/seo-aeo
+npm install -D seo-aeo
 npx seo-aeo init
 ```
 
@@ -190,7 +190,7 @@ Trigger a run anytime from the Actions tab (`workflow_dispatch`).
 ## Programmatic use
 
 ```ts
-import { createContext, runOnce } from "@elinewman/seo-aeo";
+import { createContext, runOnce } from "seo-aeo";
 
 const ctx = await createContext(process.cwd());
 const { article, audit } = await runOnce(ctx, { dryRun: true });

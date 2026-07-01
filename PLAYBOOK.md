@@ -14,7 +14,7 @@ provides at the end if they want it.
 The user will say something like:
 
 > "Make this site SEO and AEO optimized — follow
-> `node_modules/@elinewman/seo-aeo/PLAYBOOK.md`. Do Phases 0–2 now, no keys
+> `node_modules/seo-aeo/PLAYBOOK.md`. Do Phases 0–2 now, no keys
 > needed, and give me the report when done. If I paste an
 > `ANTHROPIC_API_KEY` and a GitHub token, also do Phase 3."
 
@@ -159,7 +159,7 @@ haven't, stop after Phase 2 and tell them exactly how to enable it later
 
 1. Install + onboard:
    ```bash
-   npm install -D @elinewman/seo-aeo
+   npm install -D seo-aeo
    ANTHROPIC_API_KEY=… npx seo-aeo init
    ```
    The wizard interviews the user (or you can pre-answer from what you
