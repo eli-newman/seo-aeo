@@ -8,11 +8,11 @@ import type { Cadence } from "../engine/types.js";
 export const WEEKLY_CRON = "0 14 * * 1"; // Mondays 14:00 UTC
 
 /**
- * Where CI installs the engine from. The repo is public, so this
- * `github:` spec works for everyone with zero auth. If/when the package is
- * published to npm, change this one constant to "seo-aeo".
+ * Where CI installs the engine from. The repo is public, so this `github:`
+ * spec works for everyone with zero auth and no npm publish. Change to
+ * "seo-aeo" only if/when the package is published to npm.
  */
-export const ENGINE_PACKAGE_SPEC = "seo-aeo";
+export const ENGINE_PACKAGE_SPEC = "github:eli-newman/seo-aeo";
 
 export function cronFor(_frequency: Cadence["frequency"]): string {
   // Both cadences fire weekly on the schedule; biweekly is gated in-job.

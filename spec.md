@@ -5,7 +5,7 @@
 > One interactive onboarding, one cron, one human approval — forever.
 
 ```bash
-npm install -D seo-aeo
+npm install -D github:eli-newman/seo-aeo
 npx seo-aeo init      # interview + wire up cron
 # ...every week or two, a PR appears with a new optimized article
 ```

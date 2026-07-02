@@ -159,7 +159,7 @@ haven't, stop after Phase 2 and tell them exactly how to enable it later
 
 1. Install + onboard:
    ```bash
-   npm install -D seo-aeo
+   npm install -D github:eli-newman/seo-aeo
    ANTHROPIC_API_KEY=… npx seo-aeo init
    ```
    The wizard interviews the user (or you can pre-answer from what you

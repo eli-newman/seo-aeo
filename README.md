@@ -20,13 +20,17 @@ hosts get the on-site optimization but not the auto-article engine yet.
 
 ### 1. Guided skill suite — `/seo-aeo` (easiest, < 10 min hands-on)
 
-Install the skill suite into your project, then run the orchestrator:
+The skills are plain markdown — nothing to build. Clone the repo and copy
+them into your Claude skills folder:
 
 ```bash
-npx -y seo-aeo install-skills   # → .claude/skills/
-# then, in your agent:
+git clone https://github.com/eli-newman/seo-aeo ~/seo-aeo
+mkdir -p ~/.claude/skills && cp -r ~/seo-aeo/skills/* ~/.claude/skills/
+# then, in any project's agent:
 /seo-aeo
 ```
+
+> One-liner alternative (no clone): `npx -y github:eli-newman/seo-aeo install-skills`
 
 `/seo-aeo` front-loads every decision up front (keys, cadence), then runs
 8 gated phases on its own: **preflight → discover → measure → on-site fix →
@@ -61,7 +65,7 @@ The agent then runs, on its own:
 ### 3. Run the engine directly (if you already have a blog)
 
 ```bash
-npm install -D seo-aeo
+npm install -D github:eli-newman/seo-aeo
 npx seo-aeo init            # interview + wire up the cron
 npx seo-aeo run --dry-run   # preview the first article locally
 ```
@@ -104,7 +108,7 @@ answers, FAQ, and JSON-LD.
 ### 1. Install + onboard
 
 ```bash
-npm install -D seo-aeo
+npm install -D github:eli-newman/seo-aeo
 npx seo-aeo init
 ```
 

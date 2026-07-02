@@ -67,7 +67,7 @@ describe("writeArtifacts", () => {
       "utf8",
     );
     expect(wf).toContain("Biweekly gate");
-    expect(wf).toContain("npx -y seo-aeo run");
+    expect(wf).toContain("npx -y github:eli-newman/seo-aeo run");
     expect(existsSync(path.join(root, ".seo-aeo", "voice.md"))).toBe(true);
   });
 

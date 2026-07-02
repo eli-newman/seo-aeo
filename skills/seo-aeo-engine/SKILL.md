@@ -13,7 +13,7 @@ wants automation.
 
 1. **Install + onboard** (in the target repo):
    ```bash
-   npm install -D seo-aeo
+   npm install -D github:eli-newman/seo-aeo
    ANTHROPIC_API_KEY=… npx seo-aeo init   # interview → keywords.json, voice.md, config, cron
    ```
    Pre-answer the interview from what preflight/discover gathered.
