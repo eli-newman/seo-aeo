@@ -20,15 +20,13 @@ hosts get the on-site optimization but not the auto-article engine yet.
 
 ### 1. Guided skill suite — `/seo-aeo` (easiest, < 10 min hands-on)
 
-**Claude Code** — install the suite as a plugin (two slash commands):
+Install the skill suite into your project, then run the orchestrator:
 
-```text
-/plugin marketplace add eli-newman/seo-aeo
-/plugin install seo-aeo@seo-aeo-tools
+```bash
+npx -y seo-aeo install-skills   # → .claude/skills/
+# then, in your agent:
 /seo-aeo
 ```
-
-Or copy the skills into one project: `npx -y seo-aeo install-skills`.
 
 `/seo-aeo` front-loads every decision up front (keys, cadence), then runs
 8 gated phases on its own: **preflight → discover → measure → on-site fix →
